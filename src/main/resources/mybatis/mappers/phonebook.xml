@@ -2,26 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="phonebook">
-	<!-- 쿼리문작성 -->
-	<select id="selectList" resultType="com.javaex.vo.PhonebookVO">
+	<resultMap id="resultPhonebookVO" type="PhonebookVO">
+	    <result column="person_id" property="personId" />  
+	    <result column="name" property="name" />
+	    <result column="hp" property="hp" />
+	    <result column="company" property="company" />
+	</resultMap>
+
+	<!-- 조회 리스트 -->
+	<select id="selectList" resultMap="resultPhonebookVO">
 		<![CDATA[
-			select person_id personId
+			select person_id
 				, name
 			    , hp
 			    , company
 			from person
+			order by person_id desc
 		]]>
 	</select>
 	
 	<!-- 등록 -->
-	<insert id="insert" parameterType="com.javaex.vo.PhonebookVO">
+	<insert id="insert" parameterType="PhonebookVO">
 		<![CDATA[
-			insert into person values(null,#{name},#{hp},#{company});
+			insert into person
+			values(null,#{name},#{hp},#{company});
+		]]>
+	</insert>
+	
+	<!-- 등록 Map -->
+	<insert id="insert2" parameterType="map">
+		<![CDATA[
+			insert into person
+			values(null,#{name},#{hp},#{company});
 		]]>
 	</insert>
 	
 	<!-- 수정폼 -->
-	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.PhonebookVO">
+	<!-- 기본원리는 getter를 사용하지만 단순 하나의 파라미터가 올 경우에는 변수명이 상관없음(하지만 맞추는게 좋지요)-->
+	<select id="selectOne" parameterType="int" resultMap="resultPhonebookVO">
+		<![CDATA[
+			select  person_id personId
+					,name
+					,hp
+					,company
+			from person
+			where person_id = #{personId}
+		]]>
+		
+	</select>
+	
+	<!-- 수정폼 -->
+	<!-- 기본원리는 getter를 사용하지만 단순 하나의 파라미터가 올 경우에는 변수명이 상관없음(하지만 맞추는게 좋지요)-->
+	<select id="selectOne2" parameterType="int" resultType="map">
 		<![CDATA[
 			select  person_id personId
 					,name
@@ -34,7 +66,7 @@
 	</select>
 	
 	<!-- 수정 -->
-	<update id="update" parameterType="com.javaex.vo.PhonebookVO">
+	<update id="update" parameterType="PhonebookVO">
 		<![CDATA[
 			update person
 			set name = #{name}

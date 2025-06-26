@@ -25,13 +25,11 @@ public class PhonebookController {
 	//리스트 출력
 	@RequestMapping(value="/list", method = {RequestMethod.GET, RequestMethod.POST})
 	public String list(Model model) {
-		System.out.println("/list");
+		System.out.println("PhonebookController.list()");
 		
 		List<PhonebookVO> pList = phonebookService.exeGetPhonebookList();
 		
 		model.addAttribute("pList", pList);
-		
-		System.out.println(pList);
 		
 		return "list";
 	}
@@ -39,8 +37,7 @@ public class PhonebookController {
 	//등록폼으로 이동
 	@RequestMapping(value="/wform", method = {RequestMethod.GET, RequestMethod.POST})
 	public String wform() {
-		
-		System.out.println("/wform");
+		System.out.println("PhonebookController.wform()");
 		
 		return "writeform";
 	}
@@ -48,25 +45,21 @@ public class PhonebookController {
 	//등록
 	@RequestMapping(value="/write", method = {RequestMethod.GET, RequestMethod.POST})
 	public String write(@ModelAttribute PhonebookVO phonebookVO) {
-		System.out.println("/write");
+		System.out.println("PhonebookController.write()");
 		
 		phonebookService.exePhonebookWrite(phonebookVO);
-		
-		System.out.println(phonebookVO);
 		
 		return "redirect:/list";
 	}
 	
 	//수정폼으로 이동
 	@RequestMapping(value="/mform", method = {RequestMethod.GET, RequestMethod.POST})
-	public String mform(@RequestParam(value = "personId") int personId, Model model) {
+	public String mform(@RequestParam(value = "no") int personId, Model model) {
+		System.out.println("PhonebookController.mform()");
 		
-		System.out.println("/mform");
+		PhonebookVO phonebookVO = phonebookService.exePhonebookModifyform(personId);
 		
-		PhonebookVO phonebookVO = phonebookService.exePhonebookModifiform(personId);
-		System.out.println(phonebookVO);
 		model.addAttribute("pVO",phonebookVO);
-		
 		
 		return "modifyform";
 	}
@@ -74,19 +67,16 @@ public class PhonebookController {
 	//수정
 	@RequestMapping(value="/modify", method = {RequestMethod.GET, RequestMethod.POST})
 	public String modify(@ModelAttribute PhonebookVO phonebookVO) {
-		
-		System.out.println("/modify");
+		System.out.println("PhonebookController.modify()");
 		
 		phonebookService.exePhonebookModify(phonebookVO);
-		
-		System.out.println(phonebookVO);
 		
 		return "redirect:/list";
 	}
 	
 	//삭제
 	@RequestMapping(value="/remove", method = {RequestMethod.GET, RequestMethod.POST})
-	public String remove(@RequestParam(value = "personId") int personId) {
+	public String remove(@RequestParam(value = "no") int personId) {
 		System.out.println("/remove");
 		
 		phonebookService.exePhonebookRemove(personId);

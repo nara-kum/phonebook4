@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>주소록</title>
 	</head>
 	<body>
 		<h1>주소록</h1>
@@ -34,12 +34,12 @@
 					<tr>	
 					<tr>
 						<td>
-							<a href="${pageContext.request.contextPath}/mform?personId=${phonebookVO.personId}">
+							<a href="${pageContext.request.contextPath}/mform?no=${phonebookVO.personId}">
 								[수정폼으로 이동]
 							</a>		
 						</td>
 						<td>
-							<a href="${pageContext.request.contextPath}/remove?personId=${phonebookVO.personId}">
+							<a href="${pageContext.request.contextPath}/remove?no=${phonebookVO.personId}">
 								[삭제]
 							</a>
 						</td>

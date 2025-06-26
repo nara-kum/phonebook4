@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>주소록 수정</title>
 	</head>
 	<body>
 		<h1>주소록</h1>
@@ -26,7 +26,7 @@
 			<input type="text" name="company" value="${pVO.company}">
 			<br>
 			
-			<input type="hidden" name="personId" value="${param.personId}">
+			<input type="hidden" name="no" value="${param.personId}">
 			<br>
 			
 			<button>수정</button>
