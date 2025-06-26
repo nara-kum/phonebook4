@@ -33,9 +33,9 @@ public class PhonebookService {
 	}
 	
 	//전화번호 수정폼
-	public PhonebookVO exePhonebookModifiform(PhonebookVO phonebookVO) {
+	public PhonebookVO exePhonebookModifiform(int personId) {
 		
-		phonebookVO = phonebookDAO.personSelectOne(phonebookVO);
+		PhonebookVO phonebookVO = phonebookDAO.personSelectOne(personId);
 		
 		return phonebookVO;
 		
@@ -50,9 +50,9 @@ public class PhonebookService {
 	}
 
 	//전화번호 삭제
-	public int exePhonebookRemove(PhonebookVO phonebookVO) {
+	public int exePhonebookRemove(int personId) {
 
-		int count = phonebookDAO.personDelete(phonebookVO);
+		int count = phonebookDAO.personDelete(personId);
 		
 		return count;
 	}

@@ -25,10 +25,10 @@ public class PhonebookDAO {
 	}
 
 	// 1명 정보 가져오기
-	public PhonebookVO personSelectOne(PhonebookVO phonebookVO) {
+	public PhonebookVO personSelectOne(int personId) {
 		System.out.println("sqlselectOne");
 		
-		phonebookVO = sqlSession.selectOne("phonebook.selectOne", phonebookVO);
+		PhonebookVO phonebookVO = sqlSession.selectOne("phonebook.selectOne", personId);
 		
 		return phonebookVO;
 
@@ -53,10 +53,10 @@ public class PhonebookDAO {
 	}
 
 	// 사람(주소) 삭제
-	public int personDelete(PhonebookVO phonebookVO) {
+	public int personDelete(int personId) {
 		System.out.println("sqlDelete");
 
-		int count = sqlSession.insert("phonebook.delete",phonebookVO);
+		int count = sqlSession.insert("phonebook.delete",personId);
 				
 		return count;
 	}

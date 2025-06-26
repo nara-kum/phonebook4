@@ -21,7 +21,7 @@
 	</insert>
 	
 	<!-- 수정폼 -->
-	<select id="selectOne" parameterType="com.javaex.vo.PhonebookVO" resultType="com.javaex.vo.PhonebookVO">
+	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.PhonebookVO">
 		<![CDATA[
 			select  person_id personId
 					,name
@@ -45,7 +45,7 @@
 	</update>
 	
 	<!-- 삭제 -->
-	<delete id="delete" parameterType="com.javaex.vo.PhonebookVO">
+	<delete id="delete" parameterType="int">
 		<![CDATA[
 			delete
 			from person

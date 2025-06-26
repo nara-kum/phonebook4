@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.PhonebookService;
 import com.javaex.vo.PhonebookVO;
@@ -58,11 +59,11 @@ public class PhonebookController {
 	
 	//수정폼으로 이동
 	@RequestMapping(value="/mform", method = {RequestMethod.GET, RequestMethod.POST})
-	public String mform(@ModelAttribute PhonebookVO phonebookVO, Model model) {
+	public String mform(@RequestParam(value = "personId") int personId, Model model) {
 		
 		System.out.println("/mform");
 		
-		phonebookVO = phonebookService.exePhonebookModifiform(phonebookVO);
+		PhonebookVO phonebookVO = phonebookService.exePhonebookModifiform(personId);
 		System.out.println(phonebookVO);
 		model.addAttribute("pVO",phonebookVO);
 		
@@ -85,10 +86,10 @@ public class PhonebookController {
 	
 	//삭제
 	@RequestMapping(value="/remove", method = {RequestMethod.GET, RequestMethod.POST})
-	public String remove(@ModelAttribute PhonebookVO phonebookVO) {
+	public String remove(@RequestParam(value = "personId") int personId) {
 		System.out.println("/remove");
 		
-		phonebookService.exePhonebookRemove(phonebookVO);
+		phonebookService.exePhonebookRemove(personId);
 		
 		return"redirect:/list";
 		
